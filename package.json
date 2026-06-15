@@ -23,7 +23,7 @@
     "motion": "^12.23.24"
   },
   "overrides": {
-    "node-domexception": "npm:events@^3.3.0"
+    "node-domexception": "file:./patches/node-domexception"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
