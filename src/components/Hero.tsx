@@ -13,18 +13,18 @@ export default function Hero({ onNavClick }: HeroProps) {
     // Check if the user uploaded their own profile photo to the root or public folders
     const checkCustomImage = async () => {
       try {
-        const resJpg = await fetch('/profile.jpg', { method: 'HEAD' });
-        if (resJpg.ok) {
-          setImgSrc('/profile.jpg');
-          return;
-        }
         const resPng = await fetch('/profile.png', { method: 'HEAD' });
-        if (resPng.ok) {
+        if (resPng.ok && resPng.headers.get('content-type')?.startsWith('image/')) {
           setImgSrc('/profile.png');
           return;
         }
+        const resJpg = await fetch('/profile.jpg', { method: 'HEAD' });
+        if (resJpg.ok && resJpg.headers.get('content-type')?.startsWith('image/')) {
+          setImgSrc('/profile.jpg');
+          return;
+        }
         const resJpeg = await fetch('/profile.jpeg', { method: 'HEAD' });
-        if (resJpeg.ok) {
+        if (resJpeg.ok && resJpeg.headers.get('content-type')?.startsWith('image/')) {
           setImgSrc('/profile.jpeg');
           return;
         }
@@ -139,17 +139,23 @@ export default function Hero({ onNavClick }: HeroProps) {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative w-full max-w-[420px] aspect-[4/5] bg-white rounded-[40px] shadow-2xl overflow-hidden border border-white p-2.5 z-10 flex items-center justify-center group animate-[float_6s_easeInOut_infinite]"
             >
-              <div className="absolute inset-2.5 rounded-[32px] border border-gray-100 bg-gray-50 flex items-center justify-center overflow-hidden">
-                {/* Professional corporate studio portrait */}
-                <img
+              <div className="absolute inset-2.5 rounded-[32px] border border-gray-100 bg-gradient-to-b from-[#F9F9F7] to-[#EDEDEA] flex items-center justify-center overflow-hidden">
+                {/* Professional corporate studio portrait with subtle float animation and transparent drop shadow */}
+                <motion.img
                   src={imgSrc}
                   alt="Priyanshu Patel Portrait"
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-105"
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 5,
+                    ease: "easeInOut"
+                  }}
+                  className="h-[85%] w-auto object-contain object-bottom select-none drop-shadow-[0_15px_20px_rgba(0,0,0,0.12)] transition-all duration-700 group-hover:scale-105 group-hover:drop-shadow-[0_20px_25px_rgba(0,0,0,0.18)]"
                 />
 
                 {/* Modern subtle overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent pointer-events-none" />
               </div>
 
               {/* Elegant floating Project Card from Design HTML */}
