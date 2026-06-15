@@ -1,5 +1,5 @@
 import React from 'react';
-import { Linkedin, Github, Twitter, Instagram, Mail, ArrowUpRight, Cpu } from 'lucide-react';
+import { Linkedin, Github, Twitter, Instagram, Mail, Cpu } from 'lucide-react';
 
 interface FooterProps {
   onNavClick: (sectionId: string) => void;
@@ -121,10 +121,9 @@ export default function Footer({ onNavClick }: FooterProps) {
 
         {/* Bottom copyright details */}
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 text-xs font-mono text-slate-500 gap-4">
-          <p>© {currentYear} Priyanshu Patel. All Rights Reserved.</p>
-          <div className="flex items-center space-x-1 hover:text-white transition-colors duration-200">
-            <span>Formulated by Antigravity Agent</span>
-            <ArrowUpRight className="h-3 w-3" />
+          <p>© 2026 Priyanshu Patel. All Rights Reserved.</p>
+          <div className="hover:text-white transition-colors duration-200">
+            Designed & Developed by Priyanshu Patel
           </div>
         </div>
 
